@@ -1,97 +1,187 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Login Form</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+    font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #F7F7F7;
+    box-shadow: 0px 2px 2px rgba(0,
+    0,
+    0,
+    0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {
+    font-size: 15px;
+    font-weight: bold;
+}
+</style>
 <script type="text/javascript">
-     var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
- // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-clevertap.account.push({"id": "6W5-968-R56Z"});
-clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
-clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agrees to share their IP data
- (function () {
-         var wzrk = document.createElement('script');
-         wzrk.type = 'text/javascript';
-         wzrk.async = true;
-         wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
-         var s = document.getElementsByTagName('script')[0];
-         s.parentNode.insertBefore(wzrk, s);
-  })();
+    var clevertap = {event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: []
+};
+// replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+clevertap.account.push({
+    "id": "6W5-968-R56Z"
+});
+clevertap.privacy.push({optOut: false
+}); //set the flag to true, if the user of the device opts out of sharing their data
+clevertap.privacy.push({useIP: false
+}); //set the flag to true, if the user agrees to share their IP data
+(function () {
+        var wzrk = document.createElement('script');
+        wzrk.type = 'text/javascript';
+        wzrk.async = true;
+        wzrk.src = ('https:' == document.location.protocol ? 'https: //d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+        var s = document.getElementsByTagName('script')[
+        0
+    ];
+        s.parentNode.insertBefore(wzrk, s);
+})();
+      // with the exception of one of Identity, Email, or FBID
+// each of the following fields is optional
+function passon(){
+    var username = document.getElementById('username').value;
+    var Email = document.getElementById('Email').value;
+    var Phone = document.getElementById('Phone').value;
+    var Gender;
+    var Identity = document.getElementById('Identity').value;
+    var DOB = document.getElementById('DOB').value;
+    clevertap.onUserLogin.push(
+    {
+        "Site": {
+            "Name": username, // String
+            "Identity": Identity, // String or number
+            "Email": Email, // Email address of the user
+            "Phone": Phone, // Phone (with the country code)
+            "Gender": "M", // Can be either M or F
+            "DOB": new Date(DOB),
+            "MSG-email": false,
+            "MSG-push": true,
+            "MSG-sms": true,
+            "MSG-whatsapp": true,
+        }
+    })
+}
+    function pushData(){
+        var username = document.getElementById('username').value;
+        var Email = document.getElementById('Email').value;
+        var Phone = document.getElementById('Phone').value;
+        var Identity = document.getElementById('Identity').value;
+        var DOB = document.getElementById('DOB').value;
+        clevertap.profile.push({
+        "Site": {
+            "Name": username,
+            "Identity": Identity,
+            "Email": Email,
+            "Phone": Phone,
+            "DOB": new Date(DOB),
+        }
+    });
+}
+    function eventfun(){
+        var event_name = document.getElementById('event_name').value;
+        var property = document.getElementById('property').value;
+        clevertap.event.push(event_name,
+    {
+        "property1": property,
+    });
+}
+    function notipermission(){
+        clevertap.notifications.push({
+        "apnsWebPushId": "<apple web push id>", //only for safari browser
+        "apnsWebPushServiceUrl": "<safari package service url>", //only for safari browser
+        "titleText":'Would you like to receive Push Notifications?',
+        "bodyText":'We promise to only send you relevant content and give you updates on your transactions',
+        "okButtonText":'Sign me up!',
+        "rejectButtonText":'No thanks',
+        "okButtonColor":'#F28046'
+    });
+}
 </script>
-    <meta charset="UTF-8">
-    <title>Registration Form</title>
-    <link rel="stylesheet" href="style.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+</head>
 <body>
-  <div class="container">
-    <div class="title">Registration</div>
-    <div class="content">
-      <form action="#">
-        <div class="user-details">
-          <div class="input-box">
-            <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Username</span>
-            <input type="text" placeholder="Enter your username" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your number" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Password</span>
-            <input type="password" placeholder="Enter your password" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Confirm Password</span>
-            <input type="password" placeholder="Confirm your password" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Favorite food</span>
-            <input type="text" placeholder="Enter your favorite food" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Favorite hotel</span>
-            <input type="text" placeholder="Enter your favorite hotel" required>
-          </div>
+<div class="login-form">
+    <form action=" " method="post">
+        <h2 class="text-center">Log in</h2>
+        <div class="form-group">
+                <input type="text" class="form-control" id="Identity" placeholder="Enter User ID">
+            </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" id="username">
         </div>
-        <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
-          <span class="gender-title">Gender</span>
-          <div class="category">
-            <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Male</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Female</span>
-          </label>
-          <label for="dot-3">
-            <span class="dot three"></span>
-            <span class="gender">Prefer not to say</span>
-            </label>
-          </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password">
         </div>
-        <div class="button">
-          <input type="submit" value="Login">
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="email" id="Email">
         </div>
-        <div class="button">
-          <input type="submit" value="Event">
+        <div class="form-group">
+            <input type="tel" class="form-control" placeholder="Phone Number" id="Phone">
         </div>
-        <div class="button">
-          <input type="submit" value="Extra">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="new_one" id="event_name">
         </div>
-      </form>
-    </div>
-  </div>
-
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="property" id="property">
+        </div>
+        <div class="form-group">
+            <label for="DOB">Date of Birth</label>
+            <input type="text" class="form-control" id="DOB" placeholder="Month Date, Year 00:00:00">
+        </div>
+        <div class="form-group">
+            <label>Select Gender</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </div>
+        <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" onclick="passon()">Log in</button>
+            </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" onclick="eventfun()">Event</button>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" onclick="notipermission">Notification permission</button>
+        </div>
+        <div class="clearfix">
+            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>
+    </form>
+    <p class="text-center"><a href="#">Create an Account</a></p>
+</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
